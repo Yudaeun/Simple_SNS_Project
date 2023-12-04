@@ -45,7 +45,7 @@ public class UserControllerTest {
         String userName="userName";
         String password="password";
 
-        when(userService.join()).thenReturn(mock(User.class));
+        when(userService.join(userName,password)).thenReturn(mock(User.class));
 
         mockMvc.perform(post("/api/v1/users/join")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -59,7 +59,7 @@ public class UserControllerTest {
         String userName="userName";
         String password="password";
 
-        when(userService.join()).thenThrow(new RuntimeException());
+        when(userService.join(userName,password)).thenThrow(new RuntimeException());
 
         mockMvc.perform(post("/api/v1/users/join1")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -73,7 +73,7 @@ public class UserControllerTest {
         String userName="userName";
         String password="password";
 
-        when(userService.login()).thenReturn("test_str");
+        when(userService.login(userName,password)).thenReturn("test_str");
 
         mockMvc.perform(post("/api/v1/users/login")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -87,13 +87,13 @@ public class UserControllerTest {
         String userName="userName";
         String password="password";
 
-        when(userService.login()).thenThrow(new SnsApplicationException());
+        when(userService.login(userName,password)).thenThrow(new SnsApplicationException());
 
         mockMvc.perform(post("/api/v1/users/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(new UserLoginRequest(userName,password)))
         ).andDo(print())
-                .andExpect(status().isNotFound())
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -101,7 +101,7 @@ public class UserControllerTest {
         String userName="userName";
         String password="password";
 
-        when(userService.login()).thenThrow(new SnsApplicationException());
+        when(userService.login(userName,password)).thenThrow(new SnsApplicationException());
 
         mockMvc.perform(post("/api/v1/users/login")
                 .contentType(MediaType.APPLICATION_JSON)
