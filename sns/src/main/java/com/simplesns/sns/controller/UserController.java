@@ -1,6 +1,8 @@
 package com.simplesns.sns.controller;
 
 import com.simplesns.sns.controller.request.UserJoinRequest;
+import com.simplesns.sns.controller.response.Response;
+import com.simplesns.sns.controller.response.UserJoinResponse;
 import com.simplesns.sns.model.User;
 import com.simplesns.sns.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +20,10 @@ public class UserController {
 
     //TODO: implement
     @PostMapping("/join")
-    public void join(@RequestBody UserJoinRequest request){
+    public Response<UserJoinResponse> join(@RequestBody UserJoinRequest request){
         User user=userService.join(request.getUserName(), request.getPassword());
+        UserJoinResponse response=UserJoinResponse.fromUser(user);
+
+        return Response.success(UserJoinResponse.fromUser(user));
     }
 }

@@ -2,13 +2,12 @@ package com.simplesns.sns.model;
 
 
 import com.simplesns.sns.model.entity.UserEntity;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.sql.Timestamp;
 
 @AllArgsConstructor
+@Getter
 public class User {
 
     private String userName;
@@ -18,6 +17,9 @@ public class User {
     private Timestamp registeredAt;
     private Timestamp updatedAt;
     private Timestamp deletedAt;
+
+    public User(Integer id, String userName, String password, UserRole role, Timestamp registeredAt, Timestamp updatedAt, Timestamp deletedAt) {
+    }
 
     public static User fromEntity(UserEntity entity){
         return new User(
