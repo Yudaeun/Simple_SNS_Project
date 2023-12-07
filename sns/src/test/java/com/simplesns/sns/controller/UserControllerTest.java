@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.simplesns.sns.controller.request.UserJoinRequest;
 import com.simplesns.sns.controller.request.UserLoginRequest;
+import com.simplesns.sns.exception.ErrorCode;
 import com.simplesns.sns.exception.SnsApplicationException;
 import com.simplesns.sns.model.User;
 import com.simplesns.sns.service.UserService;
@@ -59,7 +60,7 @@ public class UserControllerTest {
         String userName="userName";
         String password="password";
 
-        when(userService.join(userName,password)).thenThrow(new RuntimeException());
+        when(userService.join(userName,password)).thenThrow(new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME,""));
 
         mockMvc.perform(post("/api/v1/users/join1")
                 .contentType(MediaType.APPLICATION_JSON)
