@@ -1,1 +1,16 @@
-server.port=9090
+spring.datasource:
+  hikari.maximum-pool-size: 4
+  url: jdbc:postgresql://ep-empty-wildflower-93554042.us-east-1.aws.neon.tech/koyebdb
+  username: koyeb-adm
+  password: Dk2oWClUpiH0
+  driver-class-name: org.postgresql.Driver
+
+spring.jpa:
+  database: postgresql
+  hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+  hibernate.ddl-auto: update
+  properties.hibernate.format_sql: true
+  show-sql: true
+
+server:
+  port: 9090
