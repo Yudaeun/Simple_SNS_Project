@@ -4,6 +4,7 @@ package com.simplesns.sns.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Getter
@@ -11,6 +12,11 @@ public class SnsApplicationException extends RuntimeException {
 
     private ErrorCode errorCode;
     private String message;
+
+    public SnsApplicationException(ErrorCode errorCode){
+        this.errorCode=errorCode;
+        this.message=null;
+    }
 
     @Override
     public String getMessage() {
