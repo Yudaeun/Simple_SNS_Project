@@ -3,8 +3,10 @@ package com.simplesns.sns.controller.response;
 import com.simplesns.sns.model.User;
 import com.simplesns.sns.model.UserRole;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class UserJoinResponse {
 
     private Integer id;

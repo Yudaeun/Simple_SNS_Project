@@ -50,7 +50,7 @@ public class UserControllerTest {
 
         mockMvc.perform(post("/api/v1/users/join")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsBytes(new UserJoinRequest(userName,password)))
+                .content(objectMapper.writeValueAsBytes(new UserJoinRequest("userName","password")))
                 ).andDo(print())
                 .andExpect(status().isOk());
     }
@@ -62,7 +62,7 @@ public class UserControllerTest {
 
         when(userService.join(userName,password)).thenThrow(new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME));
 
-        mockMvc.perform(post("/api/v1/users/join1")
+        mockMvc.perform(post("/api/v1/users/join")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(new UserJoinRequest(userName,password)))
         ).andDo(print())
