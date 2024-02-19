@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
@@ -49,6 +50,15 @@ public class PostEntity {
     @PreUpdate
     void updatedAt(){
         this.updatedAt=Timestamp.from(Instant.now());
+    }
+
+    public static PostEntity of(String title,String body,UserEntity userEntity){
+        PostEntity entity=new PostEntity();
+        entity.setTitle(title);
+        entity.setBody(body);
+        entity.setUser(userEntity);
+
+        return entity;
     }
 }
 
