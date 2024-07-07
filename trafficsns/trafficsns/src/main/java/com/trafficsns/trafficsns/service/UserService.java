@@ -1,5 +1,6 @@
 package com.trafficsns.trafficsns.service;
 
+import com.trafficsns.trafficsns.exception.SnsApplicationException;
 import com.trafficsns.trafficsns.model.User;
 import com.trafficsns.trafficsns.model.entity.UserEntity;
 import com.trafficsns.trafficsns.repository.UserEntityRepository;
@@ -24,7 +25,16 @@ public class UserService {
         return new User();
     }
 
-    public String login(){
+    public String login(String userName, String password){
+        // 회원가입 여부 체크
+        UserEntity userEntity=userEntityRepository.findByUserName(userName).orElseThrow(()->new SnsApplicationException());
+        // 비밀번호 체크
+        if(!userEntity.getPassword().equals(password)){
+            throw new SnsApplicationException();
+        }
+
+        // 토큰 생성
+
         return "";
     }
 }
